@@ -1,21 +1,23 @@
-'use client'
-import {AiOutlineMenu} from "react-icons/ai"
-import Avatar from "../Avatar"
-import { useState } from "react"
-import MenuItem from "./MenuItem"
+"use client";
+import { AiOutlineMenu } from "react-icons/ai";
+import Avatar from "../Avatar";
+import { useState } from "react";
+import MenuItem from "./MenuItem";
+import useRegisterModal from "@/app/hooks/useRegisterModal";
 
 const UserMenu = () => {
-  const [isOpen,setIsOpen] = useState(false)
-  const toggleMenu = () => setIsOpen(value =>!value)
+  const registerModal = useRegisterModal();
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleMenu = () => setIsOpen((value) => !value);
   return (
-    <div  className="relative">
-        <div className="flex flex-1 items-center gap-3">
-            <div className="hidden md:block text-sm font-semibold py-3 px-4 rounden-full hover:bg-natural-100 cursor-pointer transition">
-                NextBnB your home
-            </div>
-            <div 
-                onClick={toggleMenu}
-                className="p-4
+    <div className="relative">
+      <div className="flex flex-1 items-center gap-3">
+        <div className="hidden md:block text-sm font-semibold py-3 px-4 rounden-full hover:bg-natural-100 cursor-pointer transition">
+          NextBnB your home
+        </div>
+        <div
+          onClick={toggleMenu}
+          className="p-4
                 md:py-1
                 md:px-2
                 border-[1px] 
@@ -27,18 +29,18 @@ const UserMenu = () => {
                 rounded-full 
                 cursor-pointer 
                 hover:shadow-md 
-                transition">
-
-            <AiOutlineMenu />
-            </div>
-
-          <div className="hidden md:block">
-            <Avatar  />
-          </div>
+                transition"
+        >
+          <AiOutlineMenu />
         </div>
-        {isOpen && (
-            <div 
-              className="
+
+        <div className="hidden md:block">
+          <Avatar />
+        </div>
+      </div>
+      {isOpen && (
+        <div
+          className="
                 absolute 
                 rounded-xl 
                 shadow-md
@@ -50,20 +52,14 @@ const UserMenu = () => {
                 top-12 
                 text-sm
               "
-            >
-              <div className="flex flex-col cursor-pointer">
-                <MenuItem 
-                  label="Login" 
-                  onClick={() => {}}
-                />
-                <MenuItem 
-                  label="Sign up" 
-                  onClick={() => {}}
-                />
-              </div>
-            </div>
+        >
+          <div className="flex flex-col cursor-pointer">
+            <MenuItem label="Login" onClick={() => {}} />
+            <MenuItem label="Sign up" onClick={registerModal.onOpen} />
+          </div>
+        </div>
       )}
     </div>
-  )
-}
-export default UserMenu
+  );
+};
+export default UserMenu;
